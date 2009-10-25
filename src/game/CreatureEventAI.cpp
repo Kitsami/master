@@ -69,8 +69,7 @@ CreatureEventAI::CreatureEventAI(Creature *c ) : CreatureAI(c)
             #endif
             if (m_creature->GetMap()->IsDungeon())
             {
-                if( (m_creature->GetMap()->IsHeroic() && (*i).event_flags & EFLAG_HEROIC) ||
-                    (!m_creature->GetMap()->IsHeroic() && (*i).event_flags & EFLAG_NORMAL))
+                if ((1 << (m_creature->GetMap()->GetSpawnMode()+1)) & (*i).event_flags)
                 {
                     //event flagged for instance mode
                     CreatureEventAIList.push_back(CreatureEventAIHolder(*i));
@@ -995,7 +994,7 @@ void CreatureEventAI::MoveInLineOfSight(Unit *who)
         return;
 
     if (!m_creature->hasUnitState(UNIT_STAT_STUNNED | UNIT_STAT_DIED) && who->isTargetableForAttack() &&
-        m_creature->IsHostileTo(who) && who->isInAccessablePlaceFor(m_creature) && !who->isInvisibleForAlive())
+        m_creature->IsHostileTo(who) && who->isInAccessablePlaceFor(m_creature))
     {
         if (!m_creature->canFly() && m_creature->GetDistanceZ(who) > CREATURE_Z_ATTACK_RANGE)
             return;
