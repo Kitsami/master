@@ -2442,6 +2442,48 @@ enum DiminishingGroup
     DIMINISHING_LIMITONLY
 };
 
+enum SummonCategory
+{
+    SUMMON_CATEGORY_WILD        = 0,
+    SUMMON_CATEGORY_ALLY        = 1,
+    SUMMON_CATEGORY_PET         = 2,
+    SUMMON_CATEGORY_POSSESSED   = 3,
+    SUMMON_CATEGORY_VEHICLE     = 4
+};
+
+enum SummonMask
+{
+    SUMMON_MASK_NONE            = 0x00000000,
+    SUMMON_MASK_SUMMON          = 0x00000001,
+    SUMMON_MASK_GUARDIAN        = 0x00000002,
+    SUMMON_MASK_TOTEM           = 0x00000004,
+    SUMMON_MASK_PET             = 0x00000008,
+    SUMMON_MASK_VEHICLE         = 0x00000010
+};
+
+/* NOTE : vehicles and seats has their own flags in DBC,
+but for now, they are too unknown for us, to use them */
+enum CustomVehicleFLags
+{
+    VF_CANT_MOVE                    = 0x0001,                   // vehicle cant move, only turn, maybe handle by some auras?
+    VF_FACTION                      = 0x0002,                   // vehicle retain its own faction
+    VF_DESPAWN_NPC                  = 0x0004,                   // vehicle will delete npc on spellclick
+    VF_DESPAWN_AT_LEAVE             = 0x0008,                   // vehicle will be deleted when rider leaves
+    VF_CAN_BE_HEALED                = 0x0010,                   // vehicle can be healed
+    VF_GIVE_EXP                     = 0x0020,                   // vehicle will give exp for killing enemies
+    VF_MOVEMENT                     = 0x0040,                   // vehicle will move on its own, not depending on rider, however rider can cast spells
+    VF_NON_SELECTABLE               = 0x0080                    // vehicle will be not selectable after rider enter
+    //VF_HAS_FUEL                     = 0x0100,                   // TODO : find out what energy type is fuel and implement this
+};
+
+enum CustomVehicleSeatFLags
+{
+    SF_MAIN_RIDER                   = 0x0001,                   // the one who controlls vehicle, can also cast spells
+    SF_UNATTACKABLE                 = 0x0002,                   // hided inside, and unatackable until vehicle is destroyed
+    SF_CAN_CAST                     = 0x0004,                   // player/npc can rotate, and cast OWN spells
+    SF_UNACCESSIBLE                 = 0x0008                    // player cant enter this seat by normal way (only by script)
+};
+
 enum SummonType
 {
     SUMMON_TYPE_CRITTER     = 41,
