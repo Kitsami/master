@@ -534,6 +534,17 @@ void WorldSession::HandleMovementOpcodes( WorldPacket & recv_data )
         plMover->SetInWater( !plMover->IsInWater() || plMover->GetBaseMap()->IsUnderWater(movementInfo.x, movementInfo.y, movementInfo.z) );
         if(plMover->GetBaseMap()->IsUnderWater(movementInfo.x, movementInfo.y, movementInfo.z-7.0f))
         {
+     if (movementInfo.HasMovementFlag(MOVEMENTFLAG_SWIMMING))
+     {
+         if(mover->GetTypeId() == TYPEID_UNIT)
+         {
+             if(((Creature*)mover)->isVehicle() && !((Creature*)mover)->canSwim())
+             {
+                 // NOTE : we should enter evade mode here, but...
+                 ((Vehicle*)mover)->SetSpawnDuration(1);
+             }
+         }
+     }
             plMover->m_anti_BeginFallZ=INVALID_HEIGHT;
         }
 	    }

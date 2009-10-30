@@ -3589,28 +3589,28 @@ void Spell::EffectSummonType(uint32 i)
                 EffectSummonTotem(i);
             else
                 EffectSummonGuardian(i);
-            break;
+			return;
         case SUMMON_TYPE_WILD:
         case SUMMON_TYPE_WILD2:
         case SUMMON_TYPE_QUEST_WILD:
         case SUMMON_TYPE_CREATURE:
         case SUMMON_TYPE_SCRAPBOT:
             EffectSummonWild(i);
-            break;
+			return;
         case SUMMON_TYPE_DEMON:
         case SUMMON_TYPE_INFERNO:
             EffectSummonDemon(i);
-            break;
+			return;
         case SUMMON_TYPE_SUMMON:
         case SUMMON_TYPE_ELEMENTAL:
             EffectSummon(i);
-            break;
+			return;
         case SUMMON_TYPE_CRITTER:
         case SUMMON_TYPE_CRITTER2:
         case SUMMON_TYPE_CRITTER3:
         case SUMMON_TYPE_QUEST_CRITTER:
             EffectSummonCritter(i);
-            break;
+			return;
         case SUMMON_TYPE_TOTEM_SLOT1:
         case SUMMON_TYPE_TOTEM_SLOT2:
         case SUMMON_TYPE_TOTEM_SLOT3:
@@ -3618,7 +3618,22 @@ void Spell::EffectSummonType(uint32 i)
         case SUMMON_TYPE_TOTEM:
         case SUMMON_TYPE_TOTEM2:
             EffectSummonTotem(i);
-            break;
+			return;
+         case SUMMON_TYPE_VEHICLE1:
+         case SUMMON_TYPE_VEHICLE2:
+         case SUMMON_TYPE_VEHICLE3:
+         case SUMMON_TYPE_VEHICLE4:
+         case SUMMON_TYPE_VEHICLE5:
+         case SUMMON_TYPE_VEHICLE6:
+         case SUMMON_TYPE_VEHICLE7:
+         case SUMMON_TYPE_VEHICLE8:
+         case SUMMON_TYPE_VEHICLE9:
+         case SUMMON_TYPE_VEHICLE10:
+         case SUMMON_TYPE_VEHICLE11:
+         case SUMMON_TYPE_VEHICLE12:
+         case SUMMON_TYPE_VEHICLE13:
+             EffectSummonVehicle(i);
+             return;
         case SUMMON_TYPE_UNKNOWN1:
         case SUMMON_TYPE_UNKNOWN2:
         case SUMMON_TYPE_UNKNOWN3:

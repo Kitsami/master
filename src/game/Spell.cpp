@@ -1475,7 +1475,6 @@ void Spell::SetTargetMap(uint32 effIndex,uint32 targetMode,UnitList& TagUnitMap)
         case TARGET_TOTEM_FIRE:
         case TARGET_SELF:
         case TARGET_SELF2:
-        case TARGET_AREAEFFECT_CUSTOM_2:
         case TARGET_SUMMON:
             TagUnitMap.push_back(m_caster);
             break;
@@ -1532,6 +1531,12 @@ void Spell::SetTargetMap(uint32 effIndex,uint32 targetMode,UnitList& TagUnitMap)
                 }
             }
             break;
+         case TARGET_AREAEFFECT_CUSTOM_2:
+         {
+             // used for targeting gameobjects
+             TagUnitMap.push_back(m_caster);
+             break;
+         }
         }
         case TARGET_RANDOM_ENEMY_CHAIN_IN_AREA:
         {
