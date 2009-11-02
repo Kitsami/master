@@ -6954,6 +6954,22 @@ bool Unit::HandleProcTriggerSpell(Unit *pVictim, uint32 damage, Aura* triggeredB
                     // spirit
                     if (GetStat(STAT_SPIRIT)   > stat) { trigger_spell_id = 60235;stat = GetStat(STAT_SPIRIT);   }
                 }
+				else if (auraSpellInfo->Id==67771)          // Deaths Verdict & Death's Choice (254)
+				{
+					float stat = 0.0f;
+                    // strength
+                    if (GetStat(STAT_STRENGTH) > stat) { trigger_spell_id = 67773;stat = GetStat(STAT_STRENGTH); }
+                    // agility
+                    if (GetStat(STAT_AGILITY)  > stat) { trigger_spell_id = 67772;stat = GetStat(STAT_AGILITY);  }
+				}
+                else if (auraSpellInfo->Id==67702)          // Deaths Verdict & Death's Choice (245)
+				{
+					float stat = 0.0f;
+                    // strength
+                    if (GetStat(STAT_STRENGTH) > stat) { trigger_spell_id = 67708;stat = GetStat(STAT_STRENGTH); }
+                    // agility
+                    if (GetStat(STAT_AGILITY)  > stat) { trigger_spell_id = 67703;stat = GetStat(STAT_AGILITY);  }
+				}
                 //else if (auraSpellInfo->Id==31255)        // Deadly Swiftness (Rank 1)
                 //else if (auraSpellInfo->Id==5301)         // Defensive State (DND)
                 //else if (auraSpellInfo->Id==13358)        // Defensive State (DND)
@@ -7261,6 +7277,23 @@ bool Unit::HandleProcTriggerSpell(Unit *pVictim, uint32 damage, Aura* triggeredB
 
                     RemoveAurasDueToSpell(37658);
                     trigger_spell_id = 37661;
+                    target = pVictim;
+                }
+				// Reign of the Unliving & Reign of the Dead (258)
+                else if (auraSpellInfo->Id==67758)
+                {
+                    if(!pVictim || !pVictim->isAlive())
+                        return false;
+                    // stacking
+                    CastSpell(this, 67759, true, NULL, triggeredByAura);
+
+                    Aura * dummy = GetDummyAura(67759);
+                    // release at 3 aura in stack (cont contain in basepoint of trigger aura)
+                    if(!dummy || dummy->GetStackAmount() < triggerAmount)
+                        return false;
+
+                    RemoveAurasDueToSpell(67759);
+                    trigger_spell_id = 67760;
                     target = pVictim;
                 }
                 // Thunder Capacitor
